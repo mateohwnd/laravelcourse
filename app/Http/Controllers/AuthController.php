@@ -18,13 +18,32 @@ class AuthController extends Controller
             'password' => ['required', 'min:3', 'confirmed']
         ]);
 
-        //Register
+        // Register
         $user = User::create($fields);
 
-        //Login
+        // Login
         Auth::login($user);
 
-        //Redirect
+        // Redirect
         return redirect()->route('home');
+    }
+
+    // Login the user
+    public function login(Request $request)
+    {
+        // Validate
+        $fields = $request->validate([
+            'email' => ['required', 'max:255', 'email'],
+            'password' => ['required']
+        ]);
+
+        // Try to login the user
+        if (Auth::attempt($fields, $request->remember)) {
+            return redirect()->intended();
+        } else {
+            return back()->withErrors([
+                'failed' => 'The provided credentials do not match our records.'
+            ]);
+        }
     }
 }
