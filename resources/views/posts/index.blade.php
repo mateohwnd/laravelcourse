@@ -1,9 +1,11 @@
 <x-layout>
 
-  <h1>Hello</h1>
+  @auth
+    <h1>Logged In</h1>
+  @endauth
 
-  <x-demo>
-    asdfasdfasdf
-  </x-demo>
+  @guest
+    <h1>Guest</h1>
+  @endguest
 
 </x-layout>
