@@ -7,6 +7,11 @@
   <title>{{ env('APP_NAME') }}</title>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <style>
+      [x-cloak] {
+          display: none !important;
+      }
+  </style>
 </head>
 
 <body class="bg-slate-100 text-slate-900">
@@ -22,7 +27,7 @@
         </button>
 
         {{-- Dropdown menu --}}
-        <div x-show="open" @click.outside="open = false"
+        <div x-show="open" x-cloak @click.outside="open = false"
              class="bg-white shadow-lg absolute top-10 right-0 rounded-lg overflow-hidden font-light">
           <p class="username">{{ auth()->user()->username }}</p>
 
